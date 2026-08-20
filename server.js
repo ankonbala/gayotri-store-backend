@@ -19,7 +19,7 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://gayotris-rosette.vercel.app/shop?category=home",
+  "https://gayotris-rosette.vercel.app",
   "https://6a86fb764ca033dfe748b969--extraordinary-syrniki-94fbbf.netlify.app",
 ];
 
