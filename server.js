@@ -25,26 +25,12 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Allow requests without origin (Postman, server-to-server etc.)
-      if (!origin) {
-        return callback(null, true);
-      }
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-
-      return callback(new Error("Not allowed by CORS"));
-    },
+    origin: allowedOrigins,
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
-// Handle preflight requests
-app.options("*", cors());
 
 // =========================
 // Middleware
@@ -53,12 +39,19 @@ app.options("*", cors());
 app.use(express.json());
 
 // =========================
-// Routes
+// Health Check
 // =========================
 
 app.get("/api/health", (req, res) => {
-  res.json({ status: "ok" });
+  res.json({
+    status: "ok",
+    message: "Rosette API is running",
+  });
 });
+
+// =========================
+// Routes
+// =========================
 
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
@@ -69,16 +62,11 @@ app.use("/api/auth", authRoutes);
 // =========================
 
 app.use((err, req, res, next) => {
-  console.error(err);
-
-  if (err.message === "Not allowed by CORS") {
-    return res.status(403).json({
-      message: "CORS blocked this origin",
-    });
-  }
+  console.error("Server Error:", err);
 
   res.status(500).json({
     message: "Something went wrong",
+    error: err.message,
   });
 });
 
