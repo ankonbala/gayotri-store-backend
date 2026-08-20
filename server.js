@@ -17,7 +17,10 @@ console.log("MONGO_URI:", process.env.MONGO_URI);
 
 const app = express();
 
-app.use(cors({ origin: process.env.CLIENT_ORIGIN || "http://localhost:5173" }));
+app.use(cors({ origin: process.env.CLIENT_ORIGIN || ["http://localhost:5173",
+  "https://gayotrishop.vercel.app/", "https://6a86fb764ca033dfe748b969--extraordinary-syrniki-94fbbf.netlify.app/"
+]
+ }));
 app.use(express.json());
 
 app.get("/api/health", (req, res) => res.json({ status: "ok" }));
