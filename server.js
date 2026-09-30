@@ -18,10 +18,10 @@ const app = express();
 // =========================
 
 const allowedOrigins = [
-  "http://localhost:5173",
- "https://www.rosette.website/",
-  "www.rosette.website",
-  "rosette.website"
+ "https://gayotris-rosette.vercel.app/",
+    "http://localhost:5173",
+  "https://www.rosette.website",
+  "https://rosette.website"
  
 ];
 
