@@ -19,7 +19,9 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
- "https://www.rosette.website/"
+ "https://www.rosette.website/",
+  "www.rosette.website",
+  "rosette.website"
  
 ];
 
